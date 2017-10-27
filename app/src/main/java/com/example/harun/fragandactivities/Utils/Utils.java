@@ -68,6 +68,7 @@ public class Utils {
         SharedPreferences sharedPreferences = context.getSharedPreferences(LOGGED_IN_PREF,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
+        
         String json = gson.toJson(null);
         editor.putString("Logged_In",json);
         editor.apply();
