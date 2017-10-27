@@ -64,6 +64,16 @@ public class Utils {
         return false;
     }
 
+    public static void logout(Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(LOGGED_IN_PREF,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(null);
+        editor.putString("Logged_In",json);
+        editor.apply();
+    }
+
+
     public static void setLoggedInuser(Context context,Person person){
         SharedPreferences sharedPreferences = context.getSharedPreferences(LOGGED_IN_PREF,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
