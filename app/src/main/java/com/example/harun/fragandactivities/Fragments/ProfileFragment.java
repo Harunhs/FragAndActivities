@@ -1,13 +1,17 @@
 package com.example.harun.fragandactivities.Fragments;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.harun.fragandactivities.Activities.LoginActivity;
+import com.example.harun.fragandactivities.Activities.ProfileActivity;
 import com.example.harun.fragandactivities.Models.People;
 import com.example.harun.fragandactivities.Models.Person;
 import com.example.harun.fragandactivities.R;
@@ -17,6 +21,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Harun on 25.10.2017.
@@ -29,6 +34,8 @@ public class ProfileFragment extends Fragment {
     public TextView surNameText;
     @BindView(R.id.emailText)
     public TextView emailText;
+    @BindView(R.id.logout_button)
+    public Button logout_button;
 
 
     public static ProfileFragment newInstance(){
@@ -52,6 +59,16 @@ public class ProfileFragment extends Fragment {
         nameText.setText(person.getName());
         surNameText.setText(person.getSurname());
         emailText.setText(person.getMail());
+
+
+    }
+    @OnClick(R.id.logout_button)
+    public void logout(){
+
+        Utils.logout(getContext());
+        Utils.deleteAllUsers(getContext());
+        Intent intent =new Intent(getActivity(), LoginActivity.class);
+        startActivity(intent);
 
 
     }

@@ -61,9 +61,9 @@ public class RegisterFragment  extends Fragment{
         }else {
 
         Person person=new Person(name,surName,email,password);
-        Utils.addUser(getActivity(),person);
-        Utils.setLoggedInuser(getActivity(),person);
-        Toast.makeText(getActivity(),person.getName(),Toast.LENGTH_LONG).show();
+        Utils.addUser(getContext(),person);
+        Utils.setLoggedInuser(getContext(),person);
+
         Intent intent =new Intent(getActivity(),LoginActivity.class);
         startActivity(intent);
     }

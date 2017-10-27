@@ -27,7 +27,15 @@ public class Utils {
         String json = sharedPreferences.getString("People",null);
         return gson.fromJson(json,People.class);
     }
-
+    public static void deleteAllUsers(Context context){
+        SharedPreferences sharedPreferences=context.getSharedPreferences(USER_PREF,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        ArrayList<Person> persons = new ArrayList<>();
+        String json = gson.toJson(new People(persons));
+        editor.putString("People",json);
+        editor.apply();
+    }
     public static void addUser(Context context, Person person){
 
         People people;
@@ -68,7 +76,6 @@ public class Utils {
         SharedPreferences sharedPreferences = context.getSharedPreferences(LOGGED_IN_PREF,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        // test branch test
         String json = gson.toJson(null);
         editor.putString("Logged_In",json);
         editor.apply();

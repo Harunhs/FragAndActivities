@@ -30,7 +30,13 @@
             android:text="Mail"
             android:id="@+id/emailText"
             />
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Logout"
+            android:id="@+id/logout_button"
 
+            />
 
 
     </LinearLayout>
