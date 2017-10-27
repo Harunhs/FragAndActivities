@@ -39,53 +39,39 @@ public class LoginFragment extends Fragment {
     public EditText userPasswordLog;
 
 
-    public static LoginFragment newInstance(){
+    public static LoginFragment newInstance() {
         return new LoginFragment();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view=inflater.inflate(R.layout.fragment_login,container,false);
-        ButterKnife.bind(this,view);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
+        ButterKnife.bind(this, view);
         return view;
 
     }
 
     @OnClick(R.id.register_button_log)
-    public void register(){
+    public void register() {
 
-        Intent intent=new Intent(getActivity(),RegisterActivity.class);
+        Intent intent = new Intent(getActivity(), RegisterActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.submit_button_log)
-    public void submit(){
-        String userName=userNameLog.getText().toString();
-        String password=userPasswordLog.getText().toString();
-        People people =Utils.getUsers(getActivity());
+    public void submit() {
+        String userName = userNameLog.getText().toString();
+        String password = userPasswordLog.getText().toString();
+
+        if (Utils.login(getActivity(), userName, password) == true) {
+            Intent intent = new Intent(getActivity(), ProfileActivity.class);
+            startActivity(intent);
+        } else if(userName.equals(null) || password.equals(null)){
+            Toast.makeText(getActivity(), "Fill the blanks", Toast.LENGTH_LONG).show();
+    }
+        else
+            Toast.makeText(getActivity(),"Incorrect user or password",Toast.LENGTH_LONG).show();
 
 
-        boolean a=true;
-        for(int i=0;i<people.getPeople().size();i++) {
-
-            while (!a) {
-
-                if (userName.equals(people.getPeople().get(i).getName())
-                        && password.equals(people.getPeople().get(i).getPassword())) {
-
-                    Intent intent = new Intent(getActivity(), ProfileActivity.class);
-                    startActivity(intent);
-                    Utils.setLoggedInuser(getActivity(), people.getPeople().get(i));
-                    a=false;
-
-
-                } else
-                    Toast.makeText(getActivity(), "Wrong username or password", Toast.LENGTH_LONG).show();
-
-            }
-
-        }
-        Intent intent=new Intent(getActivity(), ProfileActivity.class);
-        startActivity(intent);
     }
 }
